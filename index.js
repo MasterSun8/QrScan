@@ -7,28 +7,25 @@ function tf(es) {
 
 var imageEl = "xd"
 
-async function getImgage(){
+async function getImage(){
     try {
-        fetch("qr.png")
-            .then(function (response) {
-                return response.blob()
-            })
-            .then(function (blob) {
-                tf(blob)
-                return blob
-            })
+        let x = await fetch("qr.png")
+        x = await x.blob()
+        return x
     } catch (err) {
         tf(err)
     }
 }
 
 try {
+    let image = getImage()
+    tf(image)
     const barcodeDetector = new BarcodeDetector({
         formats: ["code_39", "codabar", "ean_13"],
     })
 
     barcodeDetector
-        .detect(await getImgage())
+        .detect(image)
         .then((barcodes) => {
             barcodes.forEach((barcode) => tf(barcode.rawValue))
         })
