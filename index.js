@@ -14,12 +14,11 @@ try {
 
     const image = new Image
     image.src = 'qr.png'
-    image.onload = () => {
-        ctx.drawImage(image, 0, 0)
-        imageData = ctx.getImageData(0, 0, image.width, image.height)
-        tf(imageData)
-        imageEl = new ImageData(imageData, image.width, image.height)
-    }
+    ctx.drawImage(image, 0, 0)
+    imageData = ctx.getImageData(0, 0, image.width, image.height)
+    tf("daata")
+    tf(imageData)
+    imageEl = new ImageData(imageData, image.width, image.height)
     tf("imgae")
     tf(imageEl)
 } catch (err) {
