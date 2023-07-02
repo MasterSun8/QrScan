@@ -1,7 +1,7 @@
 body = document.body
 
 function tf(es){
-    body.innerHTML += es+"\n"
+    body.innerHTML += es+"<br>"
 }
 
 // create new detector
