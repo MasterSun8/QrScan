@@ -5,19 +5,18 @@ function tf(es) {
     body.innerHTML += es + "<br>"
 }
 
-var imageEl
+var imageEl = "xd"
 
 try {
-    fetch("url-to-image")
+    fetch("qr.png")
         .then(function (response) {
             return response.blob()
         })
         .then(function (blob) {
             imageEl = blob
+            tf("imgae")
+            tf(imageEl)
         })
-
-    tf("imgae")
-    tf(imageEl)
 } catch (err) {
     tf(err)
 }
