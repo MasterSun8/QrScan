@@ -1,8 +1,12 @@
 body = document.body
+const imageEl = new Image(100, 200);
+imageEl.src = "qr.png";
 
 function tf(es) {
     body.innerHTML += es + "<br>"
 }
+
+tf(imageEl)
 
 // create new detector
 const barcodeDetector = new BarcodeDetector({
