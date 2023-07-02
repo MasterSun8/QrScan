@@ -1,24 +1,30 @@
+body = document.body
+
+function tf(es){
+    body.innerHTML += es+"\n"
+}
+
 // create new detector
 const barcodeDetector = new BarcodeDetector({
     formats: ["code_39", "codabar", "ean_13"],
 })
 // check compatibility
 if (barcodeDetector) {
-    document.write("Barcode Detector supported!")
+    tf("Barcode Detector supported!")
 } else {
-    document.write("Barcode Detector is not supported by this browser.")
+    tf("Barcode Detector is not supported by this browser.")
 }
 
 // check supported types
 BarcodeDetector.getSupportedFormats().then((supportedFormats) => {
-    supportedFormats.forEach((format) => document.write(format))
+    supportedFormats.forEach((format) => tf(format))
 });
 
 barcodeDetector
     .detect(imageEl)
     .then((barcodes) => {
-        barcodes.forEach((barcode) => document.write(barcode.rawValue))
+        barcodes.forEach((barcode) => tf(barcode.rawValue))
     })
     .catch((err) => {
-        document.write(err)
+        tf(err)
     })
