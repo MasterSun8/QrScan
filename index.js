@@ -8,19 +8,22 @@ function tf(es) {
 const canvas = document.createElement("canvas")
 const ctx = canvas.getContext("2d")
 
-var imageEl
+try {
+    var imageEl
 
-const image = new Image
-image.src = 'qr.png'
-image.onload = () => {
-    ctx.drawImage(image, 0, 0)
-    imageData = ctx.getImageData(0, 0, image.width, image.height)
-    tf(imageData)
-    imageEl = new ImageData(imageData,)
+    const image = new Image
+    image.src = 'qr.png'
+    image.onload = () => {
+        ctx.drawImage(image, 0, 0)
+        imageData = ctx.getImageData(0, 0, image.width, image.height)
+        tf(imageData)
+        imageEl = new ImageData(imageData,)
+    }
+
+    tf(imageEl)
+}catch(err){
+    tf(err)
 }
-
-tf(imageEl)
-
 // create new detector
 const barcodeDetector = new BarcodeDetector({
     formats: ["code_39", "codabar", "ean_13"],
