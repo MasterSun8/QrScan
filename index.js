@@ -5,20 +5,19 @@ function tf(es) {
     body.innerHTML += es + "<br>"
 }
 
-async function imageDataFromSource(source) {
-    tf(source)
-    const image = Object.assign(new Image(), { src: source })
-    await new Promise(resolve => image.addEventListener('load', () => resolve()));
-    const context = Object.assign(document.createElement('canvas'), {
-        width: image.width,
-        height: image.height
-    }).getContext('2d')
-    context.imageSmoothingEnabled = false
-    context.drawImage(image, 0, 0)
-    return context.getImageData(0, 0, image.width, image.height)
-}
+const canvas = document.createElement("canvas")
+const ctx = canvas.getContext("2d")
 
-const imageEl = await imageDataFromSource('qr.png')
+var imageEl
+
+const image = new Image
+image.src = 'qr.png'
+image.onload = () => {
+    ctx.drawImage(image, 0, 0)
+    imageData = ctx.getImageData(0, 0, image.width, image.height)
+    tf(imageData)
+    imageEl = new ImageData(imageData,)
+}
 
 tf(imageEl)
 
