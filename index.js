@@ -5,20 +5,24 @@ function tf(es) {
     body.innerHTML += es + "<br>"
 }
 
-const canvas = document.createElement("canvas")
-const ctx = canvas.getContext("2d")
-
 var imageEl
 
 try {
+    var img = new Image;
+    var c = document.createElement("canvas")
+    var ctx = c.getContext("2d")
 
-    const image = new Image
-    image.src = 'qr.png'
-    ctx.drawImage(image, 0, 0)
-    imageData = ctx.getImageData(0, 0, image.width, image.height)
-    tf("daata")
-    tf(imageData)
-    imageEl = new ImageData(imageData, image.width, image.height)
+    img.onload = function () {
+        c.width = this.naturalWidth     // update canvas size to match image
+        c.height = this.naturalHeight
+        ctx.drawImage(this, 0, 0)       // draw in image
+        c.toBlob(function (blob) {        // get content as JPEG blob
+            imageEl = blob
+        }, "image/png", 0.75)
+    };
+    img.crossOrigin = ""              // if from different origin
+    img.src = "qr.png"
+
     tf("imgae")
     tf(imageEl)
 } catch (err) {
