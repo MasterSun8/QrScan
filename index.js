@@ -19,7 +19,7 @@ try {
         tf(imageData)
         imageEl = new ImageData(imageData,)
     }
-
+    tf("imgae")
     tf(imageEl)
 }catch(err){
     tf(err)
