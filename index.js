@@ -1,7 +1,7 @@
 body = document.body
 
-function tf(es){
-    body.innerHTML += es+"<br>"
+function tf(es) {
+    body.innerHTML += es + "<br>"
 }
 
 // create new detector
@@ -18,7 +18,7 @@ if (barcodeDetector) {
 // check supported types
 BarcodeDetector.getSupportedFormats().then((supportedFormats) => {
     supportedFormats.forEach((format) => tf(format))
-});
+})
 
 barcodeDetector
     .detect(imageEl)
