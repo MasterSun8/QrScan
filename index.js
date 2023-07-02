@@ -3,6 +3,7 @@ const imageEl = new Image(100, 200);
 imageEl.src = "qr.png";
 
 function tf(es) {
+    console.log(es)
     body.innerHTML += es + "<br>"
 }
 
