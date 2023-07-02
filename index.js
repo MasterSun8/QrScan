@@ -21,30 +21,28 @@ try {
     }
     tf("imgae")
     tf(imageEl)
-}catch(err){
+} catch (err) {
     tf(err)
 }
-// create new detector
-const barcodeDetector = new BarcodeDetector({
-    formats: ["code_39", "codabar", "ean_13"],
-})
-// check compatibility
-if (barcodeDetector) {
-    tf("Barcode Detector supported!")
-} else {
-    tf("Barcode Detector is not supported by this browser.")
+
+
+try {
+    const barcodeDetector = new BarcodeDetector({
+        formats: ["code_39", "codabar", "ean_13"],
+    })
+
+    BarcodeDetector.getSupportedFormats().then((supportedFormats) => {
+        supportedFormats.forEach((format) => tf(format))
+    })
+
+    barcodeDetector
+        .detect(imageEl)
+        .then((barcodes) => {
+            barcodes.forEach((barcode) => tf(barcode.rawValue))
+        })
+        .catch((err) => {
+            tf(err)
+        })
+} catch (err) {
+    tf(err)
 }
-
-// check supported types
-BarcodeDetector.getSupportedFormats().then((supportedFormats) => {
-    supportedFormats.forEach((format) => tf(format))
-})
-
-barcodeDetector
-    .detect(imageEl)
-    .then((barcodes) => {
-        barcodes.forEach((barcode) => tf(barcode.rawValue))
-    })
-    .catch((err) => {
-        tf(err)
-    })
