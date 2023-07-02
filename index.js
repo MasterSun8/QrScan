@@ -8,20 +8,13 @@ function tf(es) {
 var imageEl
 
 try {
-    var img = new Image;
-    var c = document.createElement("canvas")
-    var ctx = c.getContext("2d")
-
-    img.onload = function () {
-        c.width = this.naturalWidth     // update canvas size to match image
-        c.height = this.naturalHeight
-        ctx.drawImage(this, 0, 0)       // draw in image
-        c.toBlob(function (blob) {        // get content as JPEG blob
+    fetch("url-to-image")
+        .then(function (response) {
+            return response.blob()
+        })
+        .then(function (blob) {
             imageEl = blob
-        }, "image/png", 0.75)
-    };
-    img.crossOrigin = ""              // if from different origin
-    img.src = "qr.png"
+        })
 
     tf("imgae")
     tf(imageEl)
