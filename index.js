@@ -5,6 +5,7 @@ const body = document.body
 const canvas = document.createElement("canvas")
 const video = document.createElement('video');
 const context = canvas.getContext('2d');
+const res = document.getElementById("res")
 canvas.width = width
 canvas.height = height
 canvas.hidden = true
@@ -13,7 +14,7 @@ body.appendChild(video)
 
 function tf(es = "") {
     console.log(es)
-    body.innerHTML += es + "<br>"
+    res.innerHTML += es + "<br>"
 }
 
 function playStream(stream) {
