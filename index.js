@@ -36,15 +36,13 @@ function playCamera() {
     console.log(devices)
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
-            video: {
-                width: width,
-                height: height
-            }
+            video: {deviceId: "60beaa4fe0326f872ede0479240c65a29b004c40fa7c2ff4e38247dfd69f8584",
+                    facingMode: "environment"}
         }
+
         var promise = devices.getUserMedia(constraints);
         promise
             .then(function (stream) {
-                __stream = stream
                 playStream(stream);
             })
             .catch(function (error) {
