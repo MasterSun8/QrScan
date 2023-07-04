@@ -32,8 +32,8 @@ function playCamera() {
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
             video: {
-                width: width,
-                height: height
+                width: canvas.width,
+                height: canvas.height
             }
         }
         var promise = devices.getUserMedia(constraints);
@@ -49,7 +49,9 @@ function playCamera() {
     }
 }
 
-playCamera()
+window.onload = () => {
+    playCamera()
+}
 
 function getBarcode() {
     try {
