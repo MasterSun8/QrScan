@@ -1,4 +1,10 @@
-body = document.body
+const body = document.body
+const img = document.createElement("img")
+img.src = "qr.jpg"
+img.id = "code"
+body.appendChild(img)
+
+let elem = document.querySelectorAll("img")[0]
 
 function tf(es) {
     console.log(es)
@@ -7,7 +13,7 @@ function tf(es) {
 
 async function getImage() {
     try {
-        let x = await fetch("qr.png")
+        let x = await fetch("qr.jpg")
         if (x.ok) {
             tf(x)
         } else {
@@ -22,36 +28,17 @@ async function getImage() {
 }
 
 try {
-    let image = Promise.resolve(getImage())
-    image.then(val => {
-        tf(val)
-        let barcodeDetector = new BarcodeDetector({
-            formats: [
-                "aztec",
-                "code_128",
-                "code_39",
-                "code_93",
-                "codabar",
-                "data_matrix",
-                "ean_13",
-                "ean_8",
-                "itf",
-                "pdf417",
-                "qr_code",
-                "upc_a",
-                "upc_e"
-            ],
-        })
+  tf(elem)
+        let barcodeDetector = new BarcodeDetector()
 
         barcodeDetector
-            .detect(val)
+            .detect(elem)
             .then((barcodes) => {
                 barcodes.forEach((barcode) => tf(barcode.rawValue))
             })
             .catch((err) => {
                 tf(err)
             })
-    })
 } catch (err) {
     tf(err)
 }
