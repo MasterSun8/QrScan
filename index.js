@@ -16,7 +16,7 @@ let pass = true
 
 function tf(es = "") {
     console.log(es)
-    res.innerHTML = "Result:<br>" + es
+    res.innerHTML = "Result: " + es
 }
 
 function playStream(stream) {
@@ -33,6 +33,7 @@ function playStream(stream) {
 
 function playCamera() {
     var devices = navigator.mediaDevices;
+    console.log(devices)
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
             video: {
