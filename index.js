@@ -3,59 +3,63 @@ const height = 300
 
 const body = document.body
 const canvas = document.createElement("canvas")
+const video = document.createElement('video');
+const context = canvas.getContext('2d');
 canvas.width = width
 canvas.height = height
+canvas.hidden = true
 body.appendChild(canvas)
+body.appendChild(video)
 
 function tf(es = "") {
     console.log(es)
     body.innerHTML += es + "<br>"
 }
 
-function playStream(canvas, stream) {
-    var video = document.createElement('video');
+function playStream(stream) {
     video.addEventListener('loadedmetadata', function () {
         var drawFrame = function () {
-            const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0);
             window.requestAnimationFrame(drawFrame);
         };
-        drawFrame();
+        drawFrame()
     });
     video.autoplay = true;
     video.srcObject = stream;
 }
 
-function playCamera(canvas, preferedWidth, preferedHeight) {
+function playCamera() {
     var devices = navigator.mediaDevices;
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
             video: {
-                width: preferedWidth,
-                height: preferedHeight
+                width: width,
+                height: height
             }
         }
         var promise = devices.getUserMedia(constraints);
         promise
             .then(function (stream) {
-                playStream(canvas, stream);
+                __stream = stream
+                playStream(stream);
             })
             .catch(function (error) {
                 console.error(error.name + ': ' + error.message);
             });
     } else {
-        console.error('Camera API is not supported.');
+        tf('Camera API is not supported.');
     }
 }
 
-playCamera(canvas, canvas.width, canvas.height);
+playCamera()
 
 function getBarcode() {
     try {
         let barcodeDetector = new BarcodeDetector()
 
+        let temp = canvas
         barcodeDetector
-            .detect(canvas)
+            .detect(temp)
             .then((barcodes) => {
                 barcodes.forEach((barcode) => tf(barcode.rawValue))
             })
@@ -66,3 +70,7 @@ function getBarcode() {
         tf(err)
     }
 }
+
+var intervalId = window.setInterval(function(){
+  getBarcode()
+}, 1000);
