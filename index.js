@@ -11,9 +11,11 @@ canvas.height = height
 canvas.hidden = true
 body.appendChild(canvas)
 
+let lastCode
+
 function tf(es = "") {
     console.log(es)
-    res.innerHTML += es + "<br>"
+    res.innerHTML = "Result:<br>" + es
 }
 
 function playStream(stream) {
@@ -61,7 +63,8 @@ function getBarcode() {
         barcodeDetector
             .detect(temp)
             .then((barcodes) => {
-                barcodes.forEach((barcode) => tf(barcode.rawValue))
+                lastCode =  barcodes[0]
+                tf(lastCode)
             })
             .catch((err) => {
                 tf(err)
