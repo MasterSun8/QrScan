@@ -12,7 +12,7 @@ function tf(es = "") {
     body.innerHTML += es + "<br>"
 }
 
-function playStream(stream) {
+function playStream(canvas, stream) {
     var video = document.createElement('video');
     video.addEventListener('loadedmetadata', function () {
         var drawFrame = function () {
@@ -26,32 +26,29 @@ function playStream(stream) {
     video.srcObject = stream;
 }
 
-function playCamera() {
+function playCamera(canvas, preferedWidth, preferedHeight) {
     var devices = navigator.mediaDevices;
-    tf(devices)
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
             video: {
-                width: canvas.width,
-                height: canvas.height
+                width: preferedWidth,
+                height: preferedHeight
             }
         }
         var promise = devices.getUserMedia(constraints);
         promise
             .then(function (stream) {
-                playStream(stream);
+                playStream(canvas, stream);
             })
             .catch(function (error) {
                 console.error(error.name + ': ' + error.message);
             });
     } else {
-        tf('Camera API is not supported.');
+        console.error('Camera API is not supported.');
     }
 }
 
-window.onload = () => {
-    playCamera()
-}
+playCamera(canvas, canvas.width, canvas.height);
 
 function getBarcode() {
     try {
