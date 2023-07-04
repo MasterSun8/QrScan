@@ -7,7 +7,7 @@ tf()
 
 let elem = document.querySelectorAll("img")[0]
 
-functiontf(es = ""){
+function tf(es = ""){
     console.log(es)
     body.innerHTML += es + "<br>"
 }
