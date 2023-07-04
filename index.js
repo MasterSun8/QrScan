@@ -10,6 +10,11 @@ var imageEl = "xd"
 async function getImage(){
     try {
         let x = await fetch("qr.png")
+        if(x.ok){
+            tf(x)
+        }else{
+            tf(x?.status)
+        }
         x = await x.blob()
         return x
     } catch (err) {
