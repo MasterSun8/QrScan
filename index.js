@@ -13,7 +13,7 @@ function tf(es = "") {
     body.innerHTML += es + "<br>"
 }
 
-function playStream(canvas, stream) {
+function playStream(stream) {
     var video = document.createElement('video');
     video.addEventListener('loadedmetadata', function () {
         var drawFrame = function () {
@@ -26,29 +26,30 @@ function playStream(canvas, stream) {
     video.srcObject = stream;
 }
 
-function playCamera(canvas, preferedWidth, preferedHeight) {
+function playCamera() {
     var devices = navigator.mediaDevices;
+    tf(devices)
     if (devices && 'getUserMedia' in devices) {
         var constraints = {
             video: {
-                width: preferedWidth,
-                height: preferedHeight
+                width: width,
+                height: height
             }
         }
         var promise = devices.getUserMedia(constraints);
         promise
             .then(function (stream) {
-                playStream(canvas, stream);
+                playStream(stream);
             })
             .catch(function (error) {
                 console.error(error.name + ': ' + error.message);
             });
     } else {
-        console.error('Camera API is not supported.');
+        tf('Camera API is not supported.');
     }
 }
 
-playCamera(canvas, canvas.width, canvas.height);
+playCamera()
 
 /*
 const img = document.createElement("img")
@@ -58,12 +59,11 @@ body.appendChild(img)
 */
 
 function getBarcode() {
-    let elem = ctx.createImageData(width, height);
-        try {
+    try {
         let barcodeDetector = new BarcodeDetector()
 
         barcodeDetector
-            .detect(elem)
+            .detect(canvas)
             .then((barcodes) => {
                 barcodes.forEach((barcode) => tf(barcode.rawValue))
             })
@@ -73,5 +73,4 @@ function getBarcode() {
     } catch (err) {
         tf(err)
     }
-
 }
