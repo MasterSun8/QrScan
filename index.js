@@ -3,14 +3,13 @@ const height = 300
 
 const body = document.body
 const canvas = document.createElement("canvas")
-const video = document.createElement('video');
+const video = document.getElementById('video');
 const context = canvas.getContext('2d');
 const res = document.getElementById("res")
 canvas.width = width
 canvas.height = height
 canvas.hidden = true
 body.appendChild(canvas)
-body.appendChild(video)
 
 function tf(es = "") {
     console.log(es)
