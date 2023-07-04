@@ -4,6 +4,10 @@ canvas.width = 300
 canvas.height = 300
 body.appendChild(canvas)
 
+function tf(es = ""){
+    console.log(es)
+    body.innerHTML += es + "<br>"
+}
 
 function playStream(canvas, stream) {
     var video = document.createElement('video');
@@ -43,21 +47,17 @@ function playCamera(canvas, preferedWidth, preferedHeight) {
 
 playCamera(canvas, canvas.width, canvas.height);
 
-
 /*
 const img = document.createElement("img")
 img.src = "qrTest.jpg"
 img.id = "code"
 body.appendChild(img)
+*/
 
-let elem = img
+function getBarcode(){
 
-function tf(es = ""){
-    console.log(es)
-    body.innerHTML += es + "<br>"
-}
+    let elem = canvas.toBlob()
 
-window.onload = () => {
     try {
         let barcodeDetector = new BarcodeDetector()
 
