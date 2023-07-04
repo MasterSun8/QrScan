@@ -23,8 +23,9 @@ async function getImage() {
 }
 
 try {
-    let image = getImage()
+    let image = Promise.resolve(getImage())
     image.then(val => {
+        tf(val)
         let barcodeDetector = new BarcodeDetector({
             formats: ["code_39", "codabar", "ean_13"],
         })
