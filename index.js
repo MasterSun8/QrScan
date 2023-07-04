@@ -5,8 +5,6 @@ function tf(es) {
     body.innerHTML += es + "<br>"
 }
 
-var imageEl = "xd"
-
 async function getImage() {
     try {
         let x = await fetch("qr.png")
@@ -14,6 +12,7 @@ async function getImage() {
             tf(x)
         } else {
             tf(x?.status)
+            tf(x?.statusText)
         }
         x = await x.blob()
         return x
