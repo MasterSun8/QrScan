@@ -15,7 +15,7 @@ function tf(es = ""){
 window.onload = () => {
     try {
         tf(elem)
-        let barcodeDetector = newBarcodeDetector()
+        let barcodeDetector = new BarcodeDetector()
 
         barcodeDetector
             .detect(elem)
