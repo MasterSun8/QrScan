@@ -12,6 +12,7 @@ canvas.hidden = true
 body.appendChild(canvas)
 
 let lastCode
+let pass = true
 
 function tf(es = "") {
     console.log(es)
@@ -50,6 +51,7 @@ function playCamera() {
             });
     } else {
         tf('Camera API is not supported.');
+        pass = false
     }
 }
 
@@ -63,7 +65,7 @@ function getBarcode() {
         barcodeDetector
             .detect(temp)
             .then((barcodes) => {
-                if(lastCode != barcodes[0].rawValue){
+                if(lastCode != barcodes[0]?.rawValue){
                     lastCode = barcodes[0]?.rawValue
                     tf(lastCode)
                 }
@@ -72,10 +74,12 @@ function getBarcode() {
                 tf(err)
             })
     } catch (err) {
-        tf(err)
+        console.error(err)
     }
 }
 
-var intervalId = window.setInterval(function(){
-  getBarcode()
-}, 1000);
+if(pass){
+    var intervalId = window.setInterval(function(){
+        getBarcode()
+      }, 1000);
+}
