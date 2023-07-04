@@ -1,3 +1,4 @@
+const body = document.body
 const canvas = document.createElement("canvas")
 canvas.width = 300
 canvas.height = 300
@@ -44,13 +45,12 @@ playCamera(canvas, canvas.width, canvas.height);
 
 
 /*
-const body = document.body
 const img = document.createElement("img")
 img.src = "qrTest.jpg"
 img.id = "code"
 body.appendChild(img)
 
-let elem = document.querySelectorAll("img")[0]
+let elem = img
 
 function tf(es = ""){
     console.log(es)
