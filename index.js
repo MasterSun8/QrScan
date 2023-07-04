@@ -65,9 +65,11 @@ function getBarcode() {
         barcodeDetector
             .detect(temp)
             .then((barcodes) => {
-                if(lastCode != barcodes[0]?.rawValue){
-                    lastCode = barcodes[0]?.rawValue
-                    tf(lastCode)
+                if (barcodes[0]?.rawValue) {
+                    if (lastCode != barcodes[0]?.rawValue) {
+                        lastCode = barcodes[0]?.rawValue
+                        tf(lastCode)
+                    }
                 }
             })
             .catch((err) => {
@@ -78,8 +80,8 @@ function getBarcode() {
     }
 }
 
-if(pass){
-    var intervalId = window.setInterval(function(){
+if (pass) {
+    var intervalId = window.setInterval(function () {
         getBarcode()
-      }, 1000);
+    }, 1000);
 }
