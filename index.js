@@ -1,8 +1,12 @@
+const width = 300
+const height = 300
+
 const body = document.body
 const canvas = document.createElement("canvas")
 canvas.width = 300
 canvas.height = 300
 body.appendChild(canvas)
+const context = canvas.getContext('2d');
 
 function tf(es = "") {
     console.log(es)
@@ -12,7 +16,6 @@ function tf(es = "") {
 function playStream(canvas, stream) {
     var video = document.createElement('video');
     video.addEventListener('loadedmetadata', function () {
-        const context = canvas.getContext('2d');
         var drawFrame = function () {
             context.drawImage(video, 0, 0);
             window.requestAnimationFrame(drawFrame);
@@ -55,22 +58,20 @@ body.appendChild(img)
 */
 
 function getBarcode() {
-
-    let elem = canvas.toBlob(blob => {
+    let elem = ctx.createImageData(width, height);
         try {
-            let barcodeDetector = new BarcodeDetector()
+        let barcodeDetector = new BarcodeDetector()
 
-            barcodeDetector
-                .detect(blob)
-                .then((barcodes) => {
-                    barcodes.forEach((barcode) => tf(barcode.rawValue))
-                })
-                .catch((err) => {
-                    tf(err)
-                })
-        } catch (err) {
-            tf(err)
-        }
-    })
+        barcodeDetector
+            .detect(elem)
+            .then((barcodes) => {
+                barcodes.forEach((barcode) => tf(barcode.rawValue))
+            })
+            .catch((err) => {
+                tf(err)
+            })
+    } catch (err) {
+        tf(err)
+    }
 
 }
