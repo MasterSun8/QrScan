@@ -63,8 +63,10 @@ function getBarcode() {
         barcodeDetector
             .detect(temp)
             .then((barcodes) => {
-                lastCode = barcodes[0]?.rawValue
-                tf(lastCode)
+                if(lastCode != barcodes[0].rawValue){
+                    lastCode = barcodes[0]?.rawValue
+                    tf(lastCode)
+                }
             })
             .catch((err) => {
                 tf(err)
