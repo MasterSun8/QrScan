@@ -3,10 +3,9 @@ const height = 300
 
 const body = document.body
 const canvas = document.createElement("canvas")
-canvas.width = 300
-canvas.height = 300
+canvas.width = width
+canvas.height = height
 body.appendChild(canvas)
-const context = canvas.getContext('2d');
 
 function tf(es = "") {
     console.log(es)
@@ -17,6 +16,7 @@ function playStream(stream) {
     var video = document.createElement('video');
     video.addEventListener('loadedmetadata', function () {
         var drawFrame = function () {
+            const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0);
             window.requestAnimationFrame(drawFrame);
         };
@@ -50,13 +50,6 @@ function playCamera() {
 }
 
 playCamera()
-
-/*
-const img = document.createElement("img")
-img.src = "qrTest.jpg"
-img.id = "code"
-body.appendChild(img)
-*/
 
 function getBarcode() {
     try {
