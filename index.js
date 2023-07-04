@@ -14,7 +14,6 @@ body.appendChild(canvas)
 
 let constraints = {
     video: {
-        deviceId: "60beaa4fe0326f872ede0479240c65a29b004c40fa7c2ff4e38247dfd69f8584",
         facingMode: "environment"
     }
 }
