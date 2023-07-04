@@ -1,9 +1,54 @@
+const canvas = document.createElement("canvas")
+canvas.width = 300
+canvas.height = 300
+body.appendChild(canvas)
+
+
+function playStream(canvas, stream) {
+    var video = document.createElement('video');
+    video.addEventListener('loadedmetadata', function() {
+        const context = canvas.getContext('2d');
+        var drawFrame = function() {
+            context.drawImage(video, 0, 0);
+            window.requestAnimationFrame(drawFrame);
+        };
+        drawFrame();
+    });
+    video.autoplay = true;
+    video.srcObject = stream;
+}
+
+function playCamera(canvas, preferedWidth, preferedHeight) {
+    var devices = navigator.mediaDevices;
+    if (devices && 'getUserMedia' in devices) {
+        var constraints = {
+            video: {
+                width: preferedWidth,
+                height: preferedHeight
+            }
+        }
+        var promise = devices.getUserMedia(constraints);
+        promise
+            .then(function(stream) {
+                playStream(canvas, stream);
+            })
+            .catch(function(error) {
+                console.error(error.name + ': ' + error.message);
+            });
+    } else {
+        console.error('Camera API is not supported.');
+    }
+}
+
+playCamera(canvas, canvas.width, canvas.height);
+
+
+/*
 const body = document.body
 const img = document.createElement("img")
 img.src = "qrTest.jpg"
 img.id = "code"
 body.appendChild(img)
-tf()
 
 let elem = document.querySelectorAll("img")[0]
 
@@ -14,7 +59,6 @@ function tf(es = ""){
 
 window.onload = () => {
     try {
-        tf(elem)
         let barcodeDetector = new BarcodeDetector()
 
         barcodeDetector
@@ -29,3 +73,4 @@ window.onload = () => {
         tf(err)
     }
 }
+*/
