@@ -1,6 +1,6 @@
 const body = document.body
 const img = document.createElement("img")
-img.src = "qr.jpg"
+img.src = "qrTest.jpg"
 img.id = "code"
 body.appendChild(img)
 tf()
