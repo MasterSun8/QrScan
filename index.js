@@ -99,6 +99,7 @@ function getBarcode() {
                 if (barcodes[0]?.rawValue) {
                     if (lastCode != barcodes[0]?.rawValue) {
                         lastCode = barcodes[0]?.rawValue
+                        alert("The code you scanned is: " + lastCode)
                         tf(lastCode)
                     }
                 }
