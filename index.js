@@ -12,6 +12,8 @@ canvas.height = height
 canvas.hidden = true
 body.appendChild(canvas)
 
+var errorCounter = 0
+
 let constraints = {
     video: {
         facingMode: "environment"
@@ -109,6 +111,11 @@ function getBarcode() {
             })
     } catch (err) {
         console.error(err)
+        errorCounter++
+        res.innerHTML = 'Trying to call the shape API' + '.'.repeat(errorCounter)
+        if (errorCounter > 10) {
+            res.innerHTML = "Your device is incapable of supporting the Shape API"
+        }
     }
 }
 
