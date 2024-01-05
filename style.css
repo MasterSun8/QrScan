@@ -14,4 +14,11 @@ footer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    position: fixed;
+    left: 0;
+    bottom: 1vh;
+    width: 100%;
+    color: white;
+    text-align: center;
+    justify-content: space-evenly;
 }
